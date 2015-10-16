@@ -8,6 +8,7 @@ package it.jaschke.alexandria.CameraPreview;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,6 +21,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private Camera mCamera;
     private Camera.PreviewCallback previewCallback;
     private Camera.AutoFocusCallback autoFocusCallback;
+
+    public CameraPreview(Context context, AttributeSet as) {
+        super(context, as);
+    }
 
     public CameraPreview(Context context, Camera camera,
                          Camera.PreviewCallback previewCb,
