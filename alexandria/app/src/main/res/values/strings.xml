@@ -10,13 +10,18 @@
     <string name="navigation_drawer_open" >Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="scan_button">Scan</string>
+    <string name="search_button">Search</string>
     <string name="input_hint">Insert ISBN-13. Digits only.</string>
     <string name="book_cover">Bookcover</string>
 
     <string name="ok_button">Next</string>
     <string name="cancel_button">Cancel</string>
+    <string name="book_exists">This book already exists in your library.</string>
+    <string name="error_occurred">An error occurred while trying to store, please try again.</string>
+    <string name="book_saved">Book saved successfully!</string>
     <string name="not_found">No Book found</string>
+    <string name="invalid_json">Invalid book info received, not processing.</string>
+    <string name="network_unavailable">You may want to consider trying again when the network is available.</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
     <string name="pref_startScreen">Select Startscreen</string>

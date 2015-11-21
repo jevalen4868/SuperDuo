@@ -166,9 +166,9 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
      * to get the barcode that was detected first.
      * @return graphic containing the barcode, or null if no barcodes are detected.
      */
-    public T getFirstGraphic() {
+    public Set<T> getAllGraphics() {
         synchronized (mLock) {
-            return mFirstGraphic;
+            return mGraphics;
         }
     }
 
