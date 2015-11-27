@@ -143,6 +143,8 @@ public class AddBookConfirm extends Fragment {
             }
             if(bookVo == null) {
                 DisplayFunctions.shortToast(getActivity(), "No data found!");
+                // No data found, return to normal view.
+                resetView();
                 return;
             }
             setBookDetail(bookVo);

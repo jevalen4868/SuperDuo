@@ -74,9 +74,13 @@ public class NavigationDrawerFragment extends Fragment {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }else{
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            mCurrentSelectedPosition = Integer.parseInt(prefs.getString("pref_startFragment","0"));
-            selectItem(mCurrentSelectedPosition);
+            // I need to make sure it doesn't load the other fragment views on the first open.
+            // Loading this on the first open causes the keyboard to show.
+            if(mUserLearnedDrawer) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                mCurrentSelectedPosition = Integer.parseInt(prefs.getString("pref_startFragment", "0"));
+                selectItem(mCurrentSelectedPosition);
+            }
         }
 
     }

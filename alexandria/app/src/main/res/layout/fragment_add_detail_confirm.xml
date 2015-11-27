@@ -3,6 +3,14 @@
     android:id="@+id/book_add_detail_confirm_view"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0"
+        android:gravity="center">
+
     <TextView
         android:id="@+id/bookTitle"
         android:layout_width="wrap_content"
@@ -47,35 +55,41 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="@dimen/small_fontsize" />
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dip"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|center"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/delete_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_action_discard"
             android:text="@string/cancel_button"
-            />
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp" />
 
         <Button
             android:id="@+id/save_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_action_accept"
             android:text="@string/ok_button"
-             />
+            android:gravity="bottom"
+            android:layout_marginBottom="5dp" />
 
     </LinearLayout>
 </LinearLayout>
