@@ -87,16 +87,24 @@ public class AddBookConfirm extends Fragment {
             ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
         }
         String imgUrl = bookVo.getImageLinks();
-        if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
-            Picasso.with(getActivity())
-                    .load(imgUrl)
-                    .into((ImageView) rootView.findViewById(R.id.bookCover));
-            rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
+        if(imgUrl != null ) {
+            if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
+                Picasso.with(getActivity())
+                        .load(imgUrl)
+                        .into((ImageView) rootView.findViewById(R.id.bookCover));
+                rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
+            }
         }
 
         ((TextView) rootView.findViewById(R.id.categories)).setText(bookVo.getCategories());
 
-        rootView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
+        // Ensure visibility of Ok / Cancel buttons.
+        View saveButton = rootView.findViewById(R.id.save_button);
+        saveButton.setVisibility(View.VISIBLE);
+        View deleteButton = rootView.findViewById(R.id.delete_button);
+        deleteButton.setVisibility(View.VISIBLE);
+        
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Log.d(LOG_TAG + "save_button", bookVo.getBookJson());
@@ -109,7 +117,7 @@ public class AddBookConfirm extends Fragment {
             }
         });
 
-        rootView.findViewById(R.id.delete_button).setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // No matter what, reset the book view.

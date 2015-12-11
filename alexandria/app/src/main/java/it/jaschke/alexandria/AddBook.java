@@ -82,6 +82,8 @@ public class AddBook extends Fragment  {
     private CameraSource mCameraSource;
     private GraphicOverlay mGraphicOverlay;
 
+    private static boolean mInstructionSnackbarShown = false;
+
     public AddBook(){
     }
 
@@ -98,40 +100,42 @@ public class AddBook extends Fragment  {
 
         rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
         mEan = (EditText) rootView.findViewById(R.id.ean);
-
-        mEan.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //no need
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //no need
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String ean = s.toString();
-                //catch isbn10 numbers
-                if (ean.length() == 10 && !ean.startsWith("978")) {
-                    ean = "978" + ean;
+        // If landscape view this will be null.
+        if(mEan != null) {
+            mEan.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    //no need
                 }
-                if (ean.length() < 13) {
-                    return;
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    //no need
                 }
-                startBookDetail(ean);
-            }
-        });
 
-        rootView.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startBookDetail(mEan.getText().toString());
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String ean = s.toString();
+                    //catch isbn10 numbers
+                    if (ean.length() == 10 && !ean.startsWith("978")) {
+                        ean = "978" + ean;
+                    }
+                    if (ean.length() < 13) {
+                        return;
+                    }
+                    startBookDetail(ean);
+                }
+            });
 
-        if(savedInstanceState!=null){
+
+            rootView.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startBookDetail(mEan.getText().toString());
+                }
+            });
+        }
+        if(savedInstanceState!=null && mEan != null){
             mEan.setText(savedInstanceState.getString(EAN_CONTENT));
             mEan.setHint("");
         }
@@ -165,9 +169,12 @@ public class AddBook extends Fragment  {
                 requestCameraPermission();
             }
 
-            Snackbar.make(mGraphicOverlay, "After barcode recognized, tap it to capture. Or, enter ISBN manually.",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            if(mInstructionSnackbarShown == false) {
+                Snackbar.make(mGraphicOverlay, "After barcode recognized, tap it to capture. Or, enter ISBN manually.",
+                        Snackbar.LENGTH_LONG)
+                        .show();
+                mInstructionSnackbarShown = true;
+            }
         }
 
         return rootView;
